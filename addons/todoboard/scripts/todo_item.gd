@@ -4,6 +4,8 @@ class_name ToDoItem
 
 enum Type { TODO, BUG, FIXME }
 
+
+
 const TYPE_COLOR := {
 	ToDoItem.Type.TODO: Color(0.5961, 0.9843, 0.5961, 0.5),
 	ToDoItem.Type.BUG: Color(0.9569, 0.6431, 0.3765, 0.5),
@@ -26,7 +28,7 @@ static func get_type(tag: String) -> Type:
 	var lower_todo := ToDoItem.TYPE_TAG[Type.TODO].to_lower()
 	var lower_bug := ToDoItem.TYPE_TAG[Type.BUG].to_lower()
 	var lower_fixme := ToDoItem.TYPE_TAG[Type.FIXME].to_lower()
-	
+
 	match tag.to_lower():
 		lower_todo:
 			return Type.TODO
@@ -48,3 +50,12 @@ static func get_all_tags() -> Array:
 
 static func get_color(type: int) -> Color:
 	return TYPE_COLOR[type]
+
+
+static func create_new(path: String, new_type: Type, line_number: int, new_desc: String) -> ToDoItem:
+	var new_item := ToDoItem.new()
+	new_item.script_path = path
+	new_item.type = new_type
+	new_item.line = line_number
+	new_item.description = new_desc
+	return new_item

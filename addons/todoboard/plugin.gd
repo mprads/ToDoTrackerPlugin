@@ -1,37 +1,34 @@
 @tool
 extends EditorPlugin
 
-const TODOS_DOCK_SCENE = preload("res://addons/todoboard/todo_dock/todos_dock.tscn")
-const TODO_BOARD_SCENE = preload("res://addons/todoboard/board/td_board.tscn")
 const TODO_ITEM = preload("res://addons/todoboard/scripts/todo_item.gd")
 
-var todos_dock_instance: ToDosDock
-var todo_board_instance: TDBoard
-
+var todo_dock_instance: ToDoDock
+var todo_board_instance: ToDoBoard
 var todos: Dictionary[String, Array] = {}
 
 
 func _enter_tree() -> void:
-	todo_board_instance = TODO_BOARD_SCENE.instantiate()
+	todo_board_instance = ToDoBoard.create_new()
 	EditorInterface.get_editor_main_screen().add_child(todo_board_instance)
 	_make_visible(false)
 	
-	todos_dock_instance = TODOS_DOCK_SCENE.instantiate()
-	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_BR , todos_dock_instance)
+	todo_dock_instance = ToDoDock.create_new()
+	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_BR , todo_dock_instance)
 	
 	EditorInterface.get_resource_filesystem().connect("filesystem_changed", _on_file_system_changed)
 	
 	_scan_directory()
 	todo_board_instance.build_panels(todos)
-	todos_dock_instance.build_tree(todos)
+	todo_dock_instance.build_tree(todos)
 
 
 func _exit_tree() -> void:
 	if todo_board_instance:
 		todo_board_instance.queue_free()
 	
-	remove_control_from_docks(todos_dock_instance)
-	todos_dock_instance.free()
+	remove_control_from_docks(todo_dock_instance)
+	todo_dock_instance.free()
 
 
 func _has_main_screen() -> bool:
@@ -94,7 +91,6 @@ func _scan_file(path: String, file_name: String) -> void:
 	var results := regex.search_all(contents)
 
 	for result in results:
-		var todo_item := TODO_ITEM.new()
 		var result_tag := result.get_string(1)
 		
 		var line_number := 0
@@ -104,12 +100,8 @@ func _scan_file(path: String, file_name: String) -> void:
 				break
 			else:
 				line_number += 1
-				
-		todo_item.description = result.get_string(3)
-		todo_item.script_path = file_path
-		todo_item.type = ToDoItem.get_type(result_tag)
-		todo_item.line = line_number
-		
+
+		var todo_item := TODO_ITEM.create_new(file_path, ToDoItem.get_type(result_tag), line_number, result.get_string(3))
 		if todos.has(file_path):
 			todos[file_path].append(todo_item)
 		else:
@@ -135,6 +127,6 @@ func _build_regex() -> RegEx:
 func _on_file_system_changed() -> void:
 	todos = {}
 	_scan_directory()
-	
-	todos_dock_instance.build_tree(todos)
+
+	todo_dock_instance.build_tree(todos)
 	todo_board_instance.build_panels(todos)
