@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://xxaav026thtv"]
+[gd_scene format=3 uid="uid://xxaav026thtv"]
 
 [ext_resource type="Script" uid="uid://dgk6m7ebqyo1d" path="res://addons/todoboard/todo_dock/todo_dock.gd" id="1_odmwf"]
 
-[node name="ToDos" type="Control"]
+[node name="ToDos" type="Control" unique_id=550885793]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_odmwf")
 
-[node name="Tree" type="Tree" parent="."]
+[node name="Tree" type="Tree" parent="." unique_id=598875558]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

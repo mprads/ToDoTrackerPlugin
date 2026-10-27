@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjnnh0o10do25"]
+[gd_scene format=3 uid="uid://cjnnh0o10do25"]
 
 [ext_resource type="Script" uid="uid://cuo3q0rhfln6w" path="res://addons/todoboard/card/card.gd" id="1_je7sn"]
 [ext_resource type="Texture2D" uid="uid://dhbaqnfxhcan7" path="res://addons/assets/icons/external_link.png" id="1_xjkgl"]
 
-[node name="Card" type="Control"]
+[node name="Card" type="Control" unique_id=835292494]
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 3
 anchors_preset = 0
@@ -11,7 +11,7 @@ offset_right = 300.0
 offset_bottom = 150.0
 script = ExtResource("1_je7sn")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1880370616]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.129196, 0.132623, 0.206514, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=982172338]
 custom_minimum_size = Vector2(300, 160)
 layout_mode = 1
 anchors_preset = 15
@@ -33,28 +33,28 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1750386607]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1007945670]
 custom_minimum_size = Vector2(300, 36)
 layout_mode = 2
 
-[node name="PathLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PathLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=868348617]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Todo"
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1461437825]
 layout_mode = 2
 size_flags_horizontal = 10
 icon = ExtResource("1_xjkgl")
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=533405796]
 layout_mode = 2
 
-[node name="Body" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Body" type="Label" parent="MarginContainer/VBoxContainer" unique_id=701350850]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2

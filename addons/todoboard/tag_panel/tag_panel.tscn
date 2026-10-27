@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpgr0qhbes0oo"]
+[gd_scene format=3 uid="uid://cpgr0qhbes0oo"]
 
 [ext_resource type="Texture2D" uid="uid://2j3lsdet1524" path="res://addons/assets/icons/file.png" id="1_7vweu"]
 [ext_resource type="Script" uid="uid://dh1tlhslam6h6" path="res://addons/todoboard/tag_panel/tag_panel.gd" id="1_86ifu"]
 
-[node name="TagPanel" type="Panel"]
-clip_contents = true
+[node name="TagPanel" type="Panel" unique_id=1528038969]
 custom_minimum_size = Vector2(350, 625)
+clip_contents = true
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_vertical = 4
 script = ExtResource("1_86ifu")
 
-[node name="BodyVBox" type="VBoxContainer" parent="."]
+[node name="BodyVBox" type="VBoxContainer" parent="." unique_id=1506394533]
 custom_minimum_size = Vector2(350, 30)
 layout_mode = 1
 anchors_preset = 15
@@ -20,50 +20,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="BodyVBox"]
+[node name="PanelContainer" type="PanelContainer" parent="BodyVBox" unique_id=763699474]
 layout_mode = 2
 
-[node name="HeaderColor" type="ColorRect" parent="BodyVBox/PanelContainer"]
+[node name="HeaderColor" type="ColorRect" parent="BodyVBox/PanelContainer" unique_id=1121681912]
 unique_name_in_owner = true
 layout_mode = 2
-color = Color(0.517647, 0.862745, 0.556863, 0.431373)
+color = Color(0.5961, 0.9843, 0.5961, 0.5)
 
-[node name="MarginContainer" type="MarginContainer" parent="BodyVBox/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BodyVBox/PanelContainer" unique_id=77858008]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HeaderContainer" type="HBoxContainer" parent="BodyVBox/PanelContainer/MarginContainer"]
+[node name="HeaderContainer" type="HBoxContainer" parent="BodyVBox/PanelContainer/MarginContainer" unique_id=1254297229]
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="TaskCount" type="Label" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer"]
+[node name="TaskCount" type="Label" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer" unique_id=1064168769]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 text = "99"
 horizontal_alignment = 2
 
-[node name="PanelTag" type="Label" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer"]
+[node name="PanelTag" type="Label" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer" unique_id=1030252793]
 unique_name_in_owner = true
 layout_mode = 2
 text = "TODO"
 
-[node name="Button" type="Button" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer"]
+[node name="Button" type="Button" parent="BodyVBox/PanelContainer/MarginContainer/HeaderContainer" unique_id=1554346319]
 layout_mode = 2
 size_flags_horizontal = 10
 icon = ExtResource("1_7vweu")
 
-[node name="HSeparator" type="HSeparator" parent="BodyVBox"]
+[node name="HSeparator" type="HSeparator" parent="BodyVBox" unique_id=1579347065]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BodyVBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="BodyVBox" unique_id=1031757234]
 custom_minimum_size = Vector2(300, 560)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TaskContainer" type="VBoxContainer" parent="BodyVBox/ScrollContainer"]
+[node name="TaskContainer" type="VBoxContainer" parent="BodyVBox/ScrollContainer" unique_id=1865382689]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
