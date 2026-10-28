@@ -12,12 +12,12 @@ func _enter_tree() -> void:
 	todo_board_instance = ToDoBoard.create_new()
 	EditorInterface.get_editor_main_screen().add_child(todo_board_instance)
 	_make_visible(false)
-	
+
 	todo_dock_instance = ToDoDock.create_new()
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_BR , todo_dock_instance)
-	
+
 	EditorInterface.get_resource_filesystem().connect("filesystem_changed", _on_file_system_changed)
-	
+
 	_scan_directory()
 	todo_board_instance.build_panels(todos)
 	todo_dock_instance.build_tree(todos)
@@ -26,7 +26,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if todo_board_instance:
 		todo_board_instance.queue_free()
-	
+
 	remove_control_from_docks(todo_dock_instance)
 	todo_dock_instance.free()
 
@@ -50,29 +50,28 @@ func _get_plugin_icon() -> Texture2D:
 
 func _scan_directory(path: String = "res://") -> void:
 	var dir := DirAccess.open(path)
-	
+
 	if dir != null:
 		dir.include_hidden = false
 		dir.include_navigational = false
 		dir.list_dir_begin()
 		var dir_item := dir.get_next()
-		
+
 		while dir_item != "":
 			var item_path = path
 			if path == "res://":
 				item_path += dir_item
 			else:
 				item_path += "/" + dir_item
-				
+
 			if dir.current_is_dir():
 				if not dir_item in ["addons", ".godot"]:
 					_scan_directory(dir_item)
 			else:
 				if dir_item.get_extension() == "gd" || dir_item.get_extension() == "cs":
 					_scan_file(path, dir_item)
-			
+
 			dir_item = dir.get_next()
-			
 		dir.list_dir_end()
 	else:
 		printerr("TODOBOARD Error accessing " + path)
@@ -84,7 +83,7 @@ func _scan_file(path: String, file_name: String) -> void:
 		file_path += file_name
 	else: 
 		file_path += "/" + file_name
-	
+
 	var file := FileAccess.open(file_path, FileAccess.READ)
 	var contents := file.get_as_text()
 	var regex := _build_regex()
@@ -92,7 +91,6 @@ func _scan_file(path: String, file_name: String) -> void:
 
 	for result in results:
 		var result_tag := result.get_string(1)
-		
 		var line_number := 0
 
 		for line in contents.split("\n"):
@@ -111,16 +109,15 @@ func _scan_file(path: String, file_name: String) -> void:
 func _build_regex() -> RegEx:
 	var regex = RegEx.new()
 	var combined_tags := ""
-	
+
 	for type in ToDoItem.Type.values():
 		combined_tags += ToDoItem.TYPE_TAG[type] + "|"
 	combined_tags = combined_tags.trim_suffix("|")
-	
+
 	var regex_query = "(?:#|//)\\s*(%s)\\s*(\\:)?\\s*([^\\n]+)" % combined_tags
 	regex.compile(regex_query)
-	
-	assert(regex.is_valid())
 
+	assert(regex.is_valid())
 	return regex
 
 

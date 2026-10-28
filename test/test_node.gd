@@ -3,7 +3,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	# BUG this not working properly
+	#BUG: this not working properly
 	
 	#FIXME: this is urgent
 	pass

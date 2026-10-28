@@ -2,6 +2,8 @@
 class_name TagPanel
 extends Panel
 
+signal button_pressed
+
 const PANEL_SCENE = preload("uid://cpgr0qhbes0oo")
 
 @onready var header_color: ColorRect = %HeaderColor
